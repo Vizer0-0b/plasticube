@@ -1,0 +1,19 @@
+html, body{
+  height: 100%;
+  margin:0px;
+  padding: 0px;
+}
+#particles-js{
+  width: 100%;
+  height: 100%;
+  background: #111111;
+}
+.particles-content{
+  margin:0px;
+  z-index:2;
+  position:
+  absolute;
+  width:auto;
+  height:auto;
+  color:antiquewhite;
+}
