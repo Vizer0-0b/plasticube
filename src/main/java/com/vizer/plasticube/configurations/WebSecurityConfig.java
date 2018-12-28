@@ -30,20 +30,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/logout").permitAll()
-                .antMatchers("/images/**").permitAll()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/build/**").permitAll()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/src/**").permitAll()
-                .antMatchers("/vendors/**").permitAll()
-                .antMatchers("/fonts/**").permitAll()
-                .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("/").permitAll()
-                .anyRequest().authenticated()
+	                .antMatchers("/login").permitAll()
+	                .antMatchers("/logout").permitAll()
+	                .antMatchers("/images/**").permitAll()
+	                .antMatchers("/js/**").permitAll()
+	                .antMatchers("/build/**").permitAll()
+	                .antMatchers("/css/**").permitAll()
+	                .antMatchers("/src/**").permitAll()
+	                .antMatchers("/vendors/**").permitAll()
+	                .antMatchers("/fonts/**").permitAll()
+	                .antMatchers("/favicon.ico").permitAll()
+	                .antMatchers("/").permitAll()
+	                .anyRequest().authenticated()
                 .and()
-                .sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry)
+                .sessionManagement()
+                	.maximumSessions(1)
+                	.sessionRegistry(sessionRegistry)
                 .and()
                 .and()
                 .formLogin()
@@ -52,19 +54,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()            //允许所有人访问该路由
                 .and()
                 .logout()                    //自定义登出操作
-                .logoutUrl("/logout")                                                 
-                .logoutSuccessUrl("/login")                                           
-                .logoutSuccessHandler((req,resp,auth)->{
-                    //登出成功处理函数
-                    System.out.println("logout success");
-                    resp.sendRedirect("/login?logout");
-                })                              
-                .invalidateHttpSession(true)   
-                .clearAuthentication(true)                                          
-                .addLogoutHandler((req,resp,auth)->{
-                    //登出处理函数
-                    System.out.println("logout------");
-                })  
+	                .logoutUrl("/logout")                                                 
+	                .logoutSuccessUrl("/login")
+	                .logoutSuccessHandler((req,resp,auth)->{
+	                    //登出成功处理函数
+	                    System.out.println("logout success");
+	                    resp.sendRedirect("/login?logout");
+	                })                              
+	                .invalidateHttpSession(true)   
+	                .clearAuthentication(true)                                          
+	                .addLogoutHandler((req,resp,auth)->{
+	                    //登出处理函数
+	                    System.out.println("logout------");
+	                })  
                 .and()
                 .httpBasic();
     }

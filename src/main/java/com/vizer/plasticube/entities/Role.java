@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,13 +18,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="role")
 public class Role implements Comparable<Role>{
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private Integer roleLevel;
 	private String description;
 	private String menuItems;
-
+	
 	@OneToMany(mappedBy="role",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<User> user = new ArrayList<User>(); 
 	
@@ -52,6 +53,7 @@ public class Role implements Comparable<Role>{
 		}
 		return false;
 	}
+	
 	@Override
 	public String toString() {
 		return "Role{" +
@@ -69,15 +71,15 @@ public class Role implements Comparable<Role>{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Integer getRoleLevel() {
 		return roleLevel;
 	}

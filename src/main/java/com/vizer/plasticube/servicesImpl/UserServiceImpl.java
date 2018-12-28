@@ -1,4 +1,4 @@
-package com.vizer.plasticube.servicesImpl;
+package com.vizer.plasticube.servicesimpl;
 
 import java.util.List;
 

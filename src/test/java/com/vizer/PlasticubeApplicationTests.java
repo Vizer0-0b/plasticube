@@ -1,4 +1,4 @@
-package com.vizer.plasticube;
+package com.vizer;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ import com.vizer.plasticube.repositories.UserRepo;
 @SpringBootTest
 public class PlasticubeApplicationTests {
 
-    @Autowired
-    PermissionRepo permissionRepo;
-    @Autowired
-    RoleRepo roleRepo;
-    @Autowired
-    UserRepo userRepo;
+//    @Autowired
+//    PermissionRepo permissionRepo;
+//    @Autowired
+//    RoleRepo roleRepo;
+//    @Autowired
+//    UserRepo userRepo;
     
     
 	@Test

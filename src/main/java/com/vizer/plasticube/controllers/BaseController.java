@@ -23,11 +23,12 @@ public class BaseController {
     
     @RequestMapping(value = "/plasticube", method = RequestMethod.GET)
     public String plasticube(Model model) {
+    	
     	String username;
     	SecurityContext securityContext = SecurityContextHolder.getContext();
-
+    	
     	Authentication authentication = securityContext.getAuthentication();
-
+    	
     	Object principal = authentication.getPrincipal();
     	if (principal instanceof UserDetails) {
     		username = ((UserDetails)principal).getUsername();
@@ -35,12 +36,10 @@ public class BaseController {
     		username = principal.toString();
     	}
     	
-
-    	model.addAttribute("component","plasticube/index");
-    	model.addAttribute("function","test");
-	    model.addAttribute("username",username.toString());
-    	
-    	
+    	model.addAttribute("component", "plasticube/index");
+    	model.addAttribute("function", "test");
+	    model.addAttribute("username", username);
+	    
         return "shares/render";
     }
 
@@ -55,7 +54,7 @@ public class BaseController {
     	    if (auth != null){    
     	        new SecurityContextLogoutHandler().logout(request, response, auth);
     	    }
-        return "logout";
+        return "login";
     }
     
     @RequestMapping(value = "/error", method = RequestMethod.GET)

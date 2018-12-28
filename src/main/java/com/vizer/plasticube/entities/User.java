@@ -1,5 +1,6 @@
 package com.vizer.plasticube.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -8,23 +9,25 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.vizer.library.entities.Book;
+
 @Entity
 @Table(name="user")
 public class User implements UserDetails {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -8169204616909475776L;
 	
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 	@Column(unique=true)
     private String cnname;
@@ -43,8 +46,9 @@ public class User implements UserDetails {
     
     @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
     private Role role;
-//    private Integer roleId;
    
+    @OneToMany(mappedBy="currentUser", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Book> book = new ArrayList<Book>();
 
     @Override
     public boolean isAccountNonExpired() {
@@ -154,15 +158,15 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-//    public Integer getRoleId() {
-//        return roleId;
-//    }
-//
-//    public void setRoleId(Integer roleId) {
-//        this.roleId = roleId;
-//    }
-    
-    @Override
+    public List<Book> getBook() {
+		return book;
+	}
+
+	public void setBook(List<Book> book) {
+		this.book = book;
+	}
+
+	@Override
     public String toString() {
         return "User{" +
                 "id=" + id +
